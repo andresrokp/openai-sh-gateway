@@ -1,18 +1,17 @@
 "use strict";
 
-// load libraries
-const path = require('path');
+// LOAD LIB
+const morgan = require('morgan');
 const express = require('express');
 const app = express();
 
 
-
-// indicate json parsing
+// CORE MIDDLEWARES
+// To handle json in requests
 app.use(express.json());
-
+// To poner la verga console log
+app.use(morgan('[:date] :remote-addr :method :url :status :res[content-length] - :response-time ms'));
 // to use the public folder for page serving
-const publicPath = path.resolve(__dirname, 'public');
-console.log(publicPath);
 app.use(express.static("./src/public"));
 
 // Apply custom middlewares
