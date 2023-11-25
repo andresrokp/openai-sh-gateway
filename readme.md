@@ -55,9 +55,21 @@ FEAT: openai gpt api test
 + openaiTestScript.js
 + Review chat api docu: https://platform.openai.com/docs/api-reference/chat/create
 + Set up connection: OpenAI({key})
++ call completion: `openai.chat.completion.create(...args)`
 + Mock json data
 + Create prompt
 + Itereate prompt efficiency and effectiveness!!
+---
+FEAT: Home page serving
++ /public folder with html
++ Indicate express page serving: `app.use(express.static(./path/to/public))`
++ Learn: all nodejs path are from the root `./`
+---
+FEAT: Server activities logging
++ Reseacrh logging
++ Install and import morgan
++ Add morgan as express middelware: `app.use(morgan('tokenString'))`
++ Morgan bases on tokens: app.use(express.static("./src/public"));
 ---
 EXPERIMENT: Object analyzer function
 Please help me giving me a JavaScript function to describe a complex Json object in natural language, with enough detail to input the description into an LLM or ChatGPT in order it to later generate a function to traverse the object and apply basic data analytics to that described JSON object.
