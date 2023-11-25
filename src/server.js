@@ -18,7 +18,7 @@ app.use(express.static("./src/public"));
 // app.use(require('./middleware/domainValidator'));
 // app.use(require('./middleware/tokenValidator'));
 
-// Apply routes
+// Apply all routes exported by the given file. Important: Prefix "/api"
 app.use('/api', require('./routes/api'));
 
 //  object to use as server model

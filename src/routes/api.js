@@ -1,17 +1,13 @@
-
 const express = require('express');
 const router = express.Router();
 
-router.post('/process', (req, res) => {
-  // Handle camera data and build a prompt
-  const cameraData = req.body.cameraData;
-  const prompt = `Generated prompt using camera data: ${cameraData}`;
-
+router.post('/audiorequest', (req, res) => {
+  // Handle income data and build a prompt
+  console.log(req);
   // Send a query to OpenAI
-  // Process the OpenAI response and get chatgptmsg
-
+  
   // Return the response
-  res.json({ chatgptmsg: 'Response from OpenAI' });
+  res.json({ llmApiMsg: 'Response from OpenAI' });
 });
 
 module.exports = router;

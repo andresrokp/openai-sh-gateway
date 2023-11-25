@@ -51,6 +51,18 @@ document.addEventListener('DOMContentLoaded',()=>{
             log('audioUrl',audioUrl);
             // Browser play audio
             audioHtml.play()
+            // Create form object to leverage with appending
+            const utilityForm = new FormData();
+            utilityForm.append('audioFile', audioBlob);
+            // fetch Form's data to endpoint exposed by express. Get a Response object back
+            const response = await fetch(`http://${window.location.host}/api/audiorequest`,{
+                method: 'POST',
+                body: utilityForm
+            });
+            log('response',response);
+            // The Response objects body property is a data Stream in Raw Format, so has to be read as stream and parsed
+            const data = await response.json();
+            log('data',data);
             // Clean chunks to get new capture
             audioChunks = []
         }
