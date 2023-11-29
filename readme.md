@@ -73,3 +73,18 @@ FEAT: Server activities logging
 ---
 EXPERIMENT: Object analyzer function
 Please help me giving me a JavaScript function to describe a complex Json object in natural language, with enough detail to input the description into an LLM or ChatGPT in order it to later generate a function to traverse the object and apply basic data analytics to that described JSON object.
+---
+---
+---
+---
+Milestones
++ ~~Capture voice in client~~
++ ~~Post sound file to backend~~
++ Forward to whisper and fetch transcript
++ Forward transcript to gpt-turbo and fetch answer
++ Optimize prompting
++ Forward answer to whisper speech
++ Return speech answer to client
++ Play sound in client
++ Show transcript in client
++ Make it pretty
