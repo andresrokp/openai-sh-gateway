@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             log('response',response);
             // The Response objects body property is a data Stream in Raw Format, so has to be read as stream and parsed
             const data = await response.json();
-            log('data.backResponse.text',data.backResponse.text);
+            log('data',data);
             // Clean chunks to get new capture
             audioChunks = []
         }

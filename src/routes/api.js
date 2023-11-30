@@ -28,13 +28,29 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
     model: 'whisper-1',
   });
 
-  console.log('Audio transcribed :) \n', transcription);
-  res.json({backResponse: transcription})
+  const content = airportTextCorpus + transcription.text;
+  console.log('content >> ',content);
+  const completion = await openai.chat.completions.create({
+    messages: [
+      {
+        role: "user",
+        content,
+      },
+    ],
+    model: "gpt-3.5-turbo"
+  });
+
+  console.log('Request Audio transcript :) \n', transcription);
+  console.log('Assistant Response :) \n', completion);
+  res.json({'pregunta':transcription.text, 'respuesta':completion.choices[0].message.content})
 });
 
 module.exports = router;
 
-const airportTextCorpus = `Eres un asistente útil. Actúa. Me vas a responder una pregunta basada en esta información o en información parecida. Si no tienes la respuesta te la inventas, es para un prototipo de servicio al cliente. Si tienes la respuesta, tambien puedes inventar para hacerlo más interesante. Responde amable, informativo y muy corto:
+
+
+
+const airportTextCorpus = `Eres un asistente útil. Actúa. Me vas a responder una pregunta basada en esta información o en información parecida. Si no tienes la respuesta te la inventas, es para un prototipo de servicio al usuario cliente. Si tienes la respuesta, tambien puedes inventar para hacerlo más interesante. Responde amable, informativo y muy corto:
 
 Información Interna del Aeropuerto:
 
@@ -97,4 +113,4 @@ Se recomienda llegar al menos 1 hora antes del vuelo para realizar los trámites
 En caso de necesitar asistencia adicional, hay mostradores de información en ambas terminales, cerca de las entradas principales.
 Los horarios de vuelo y la disponibilidad de servicios pueden cambiar, se sugiere verificar la información en línea o con la aerolínea correspondiente.
 
-Pregunta para responder: `
+Pregunta, duda o deseo del usuario para responder: `
