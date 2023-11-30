@@ -77,6 +77,20 @@ Please help me giving me a JavaScript function to describe a complex Json object
 ---
 ---
 ---
+DUTY: Tight WSL2 memory efficiency
++ vmem was eating too much memory
++ How to manage wsl memory
+    + https://www.aleksandrhovhannisyan.com/blog/limiting-memory-usage-in-wsl-2/
++ Key commands
+    + On cmd
+        + `wsl`
+        + `wsl --shutdown`
+    + On linux
+        + `free -h --giga`
+        + `editor "$(wslpath "C:\Users\YourUsername\.wslconfig")"`
+        + write the file
+---
+---
 Milestones
 + ~~Capture voice in client~~
 + ~~Post sound file to backend~~
