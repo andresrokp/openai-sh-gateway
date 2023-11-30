@@ -39,14 +39,15 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
         // Stablish the audio handler's behavior when it stops listening
         recorder.onstop = async ()=>{
+            console.log('audioChunks',audioChunks);
+            console.log('typeof audioChunks',typeof audioChunks);
             // Join the data chunks into 1 audio Blob
-            const audioBlob = new Blob(audioChunks, {type:'audio/wav'});
-            log('audioChunks',audioChunks);
-            log('audioBlob',audioBlob);
+            const audioBlob = new Blob(audioChunks, {type:'audio/mp3'});
+            console.log('audioBlob',audioBlob);
+            console.log('typeof audioBlob',typeof audioBlob);
             // Instantiate an Audio html element
             const audioHtml = new Audio();
-            // Create an assign an URL string build from the Blob binary data
-            const audioUrl = URL.createObjectURL(audioBlob);
+            let audioUrl = URL.createObjectURL(audioBlob);
             audioHtml.src = audioUrl;
             log('audioUrl',audioUrl);
             // Browser play audio
@@ -59,10 +60,19 @@ document.addEventListener('DOMContentLoaded',()=>{
                 method: 'POST',
                 body: utilityForm
             });
-            log('response',response);
             // The Response objects body property is a data Stream in Raw Format, so has to be read as stream and parsed
             const data = await response.json();
             log('data',data);
+            log('data.respuestaAudio',data.respuestaAudio);
+            log('typeof data.respuestaAudio',typeof data.respuestaAudio);
+            // Join the data chunks into 1 audio Blob
+            const audioBlobResponse = new Blob([new Uint8Array(data.respuestaAudio.data)], {type:'audio/mp3'});
+            // Create an assign an URL string build from the Blob binary data
+            audioUrl = URL.createObjectURL(audioBlobResponse);
+            audioHtml.src = audioUrl;
+            log('audioUrl',audioUrl);
+            // Browser play audio
+            audioHtml.play()
             // Clean chunks to get new capture
             audioChunks = []
         }
