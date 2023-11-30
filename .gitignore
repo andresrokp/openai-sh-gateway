@@ -1,4 +1,5 @@
 *.wav*
+*.mp3*
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/node

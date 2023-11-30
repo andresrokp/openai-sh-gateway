@@ -40,6 +40,14 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
     model: "gpt-3.5-turbo"
   });
 
+  const mp3 = await openai.audio.speech.create({
+    model: "tts-1",
+    voice: "nova",
+    input: completion.choices[0].message.content,
+  });
+  const buffer = Buffer.from(await mp3.arrayBuffer());
+  await fs.writeFileSync('./src/others/dummyFiles/responseAudioFile.mp3', buffer);
+
   console.log('Request Audio transcript :) \n', transcription);
   console.log('Assistant Response :) \n', completion);
   res.json({'pregunta':transcription.text, 'respuesta':completion.choices[0].message.content})
