@@ -82,6 +82,7 @@ Milestones
 + ~~Post sound file to backend~~
 + Forward to whisper and fetch transcript
 + Forward transcript to gpt-turbo and fetch answer
++ ~~Elaborate information corpus~~
 + Optimize prompting
 + Forward answer to whisper speech
 + Return speech answer to client
