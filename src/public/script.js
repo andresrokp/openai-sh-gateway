@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             audioHtml.src = audioUrl;
             log('audioUrl',audioUrl);
             // Browser play audio
-            audioHtml.play()
+            // audioHtml.play()
             // Create form object to leverage with appending
             const utilityForm = new FormData();
             utilityForm.append('audioFile', audioBlob);

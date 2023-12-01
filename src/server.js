@@ -4,6 +4,7 @@
 const morgan = require('morgan');
 const express = require('express');
 const app = express();
+const cors = require('cors')
 
 
 // CORE MIDDLEWARES
@@ -13,6 +14,9 @@ app.use(express.json());
 app.use(morgan('[:date] :remote-addr :method :url :status :res[content-length] - :response-time ms'));
 // to use the public folder for page serving
 app.use(express.static("./src/public"));
+// to allow cross origin resources sharing
+app.use(cors());
+
 
 // Apply custom middlewares
 // app.use(require('./middleware/domainValidator'));
