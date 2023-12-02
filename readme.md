@@ -91,15 +91,27 @@ DUTY: Tight WSL2 memory efficiency
         + write the file
 ---
 ---
+---
+---
+---
+
+---
 Milestones
-+ ~~Capture voice in client~~
-+ ~~Post sound file to backend~~
-+ Forward to whisper and fetch transcript
-+ Forward transcript to gpt-turbo and fetch answer
-+ ~~Elaborate information corpus~~
-+ Optimize prompting
-+ Forward answer to whisper speech
-+ Return speech answer to client
-+ Play sound in client
-+ Show transcript in client
++ voice2voice AI assistant beta
+    + ~~Capture voice in client~~
+    + ~~Post sound file to backend~~
+    + ~~Forward to whisper and fetch transcript~~
+    + ~~Forward transcript to gpt-turbo and fetch answer~~
+    + ~~Elaborate information corpus~~
+    + ~~Optimize prompting~~
+    + ~~Forward answer to whisper speech~~
+    + ~~Return speech answer to client~~
+    + ~~Play sound in client~~
+    + Show transcript in client
+
 + Make it pretty
+    + Identify TB look and feel -> 
+    + Interact with gpt to clarify desing procedure
+        + Long conversation
+        + Main prompt: 
+        + 
