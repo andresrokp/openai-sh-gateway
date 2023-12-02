@@ -1,3 +1,5 @@
+const log = console.log
+
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
@@ -18,7 +20,7 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
         console.error('Error saving audio file :( \n', err);
         res.status(500).json({ error: 'Internal Server Error :(' });
     } else {
-        console.log('Audio file saved successfully :)');
+        log('Audio file saved successfully :)');
       }
   });
   
@@ -27,9 +29,10 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
     file: fs.createReadStream('./src/others/dummyFiles/requestAudioFile.mp3'),
     model: 'whisper-1',
   });
-
+  log('Request Audio transcript :) \n', transcription);
+  
   const content = airportTextCorpus + transcription.text;
-  console.log('content >> ',content);
+  log('content >> ',content);
   const completion = await openai.chat.completions.create({
     messages: [
       {
@@ -39,17 +42,18 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
     ],
     model: "gpt-3.5-turbo"
   });
+  log('Assistant Response :) \n', completion.choices[0].message.content);
 
   const mp3 = await openai.audio.speech.create({
     model: "tts-1",
     voice: "nova",
     input: completion.choices[0].message.content,
   });
+  mp3 ? log('Audio response OK') : null;
   const mp3Buffer = Buffer.from(await mp3.arrayBuffer());
+  mp3Buffer ? log('Audio buffer OK') : null;
   await fs.writeFileSync('./src/others/dummyFiles/responseAudioFile.mp3', mp3Buffer);
-
-  console.log('Request Audio transcript :) \n', transcription);
-  console.log('Assistant Response :) \n', completion.choices[0].message.content);
+  log('Packaging and sending response...')
   res.json({'pregunta':transcription.text, 'respuestaTxt':completion.choices[0].message.content, 'respuestaAudio':mp3Buffer})
 });
 
