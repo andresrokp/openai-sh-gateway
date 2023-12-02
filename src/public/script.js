@@ -1,7 +1,5 @@
 const log = console.log;
 
-document.getElementById("title").innerText = "Hello akap's SH AIrport assistant";
-
 // This happens only after all html is loades (styles and assets does not matters)
 document.addEventListener('DOMContentLoaded',()=>{
 
@@ -89,3 +87,71 @@ document.addEventListener('DOMContentLoaded',()=>{
         recorder.stop();
     })
 })
+
+let isRecording = false;
+
+function toggleRecording() {
+    if (!isRecording) {
+        startRecording();
+    } else {
+        stopRecording();
+    }
+}
+
+function startRecording() {
+    // Reset previous states
+    resetStates();
+
+    // Simulate recording logic
+    document.getElementById('actionButton').classList.add('recording');
+
+    // Simulate data fetch
+    setTimeout(() => {
+        document.getElementById('actionButton').classList.add('upload');
+        document.getElementById('actionIcon').classList.add('upload');
+
+        // Simulate loading
+        setTimeout(() => {
+            document.getElementById('actionButton').classList.remove('upload');
+            document.getElementById('actionIcon').classList.remove('upload');
+            document.getElementById('actionButton').classList.add('loading');
+            document.getElementById('actionIcon').classList.add('loading');
+
+            // Simulate data response
+            setTimeout(() => {
+                document.getElementById('actionButton').classList.remove('recording', 'upload', 'loading');
+                document.getElementById('actionIcon').classList.add('stop');
+                document.getElementById('textresponse').innerText = 'Assistant response text here.';
+
+                // Simulate person image zoom in
+                document.getElementById('personImage').classList.add('zoomed');
+            }, 3000); // Adjust the time based on your needs
+        }, 1000); // Adjust the time based on your needs
+    }, 1000); // Adjust the time based on your needs
+
+    isRecording = true;
+}
+
+function stopRecording() {
+    // Reset previous states
+    resetStates();
+
+    // Additional logic for stopping recording, if needed
+    isRecording = false;
+}
+
+function resetStates() {
+    document.getElementById('actionButton').classList.remove('recording', 'upload', 'loading', 'stop');
+    document.getElementById('actionIcon').classList.remove('upload', 'stop');
+    document.getElementById('textresponse').innerText = '';
+    
+    // Reset person image
+    document.getElementById('personImage').classList.remove('zoomed');
+    setTimeout(() => {
+        // Reset image source after the zoom-out animation
+        document.getElementById('personImage').src = "https://as1.ftcdn.net/v2/jpg/02/46/92/18/1000_F_246921800_d3ixfFSOmVhu2yS5Gj8N2MbLJ7B3BB0e.jpg";
+    }, 500);
+}
+
+// Event listener for the action button
+document.getElementById('actionButton').addEventListener('click', toggleRecording);
