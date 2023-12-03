@@ -88,6 +88,17 @@ document.addEventListener('DOMContentLoaded',()=>{
     })
 })
 
+
+
+
+
+/**
+ * ----------------
+ * UI logic
+ * ----------------
+ */
+
+
 let isRecording = false;
 
 function toggleRecording() {
@@ -102,32 +113,30 @@ function startRecording() {
     // Reset previous states
     resetStates();
 
-    // Simulate recording logic
-    document.getElementById('actionButton').classList.add('recording');
-
     // Simulate data fetch
     setTimeout(() => {
-        document.getElementById('actionButton').classList.add('upload');
+        // document.getElementById('actionButton').classList.add('upload');
         document.getElementById('actionIcon').classList.add('upload');
 
         // Simulate loading
         setTimeout(() => {
-            document.getElementById('actionButton').classList.remove('upload');
+            // document.getElementById('actionButton').classList.remove('upload');
             document.getElementById('actionIcon').classList.remove('upload');
-            document.getElementById('actionButton').classList.add('loading');
+            // document.getElementById('actionButton').classList.add('loading');
             document.getElementById('actionIcon').classList.add('loading');
-
+            
             // Simulate data response
             setTimeout(() => {
-                document.getElementById('actionButton').classList.remove('recording', 'upload', 'loading');
+                document.getElementById('actionIcon').classList.remove('loading');
+                // document.getElementById('actionButton').classList.remove('recording', 'upload', 'loading');
                 document.getElementById('actionIcon').classList.add('stop');
                 document.getElementById('textresponse').innerText = 'Assistant response text here.';
 
                 // Simulate person image zoom in
                 document.getElementById('personImage').classList.add('zoomed');
-            }, 3000); // Adjust the time based on your needs
-        }, 1000); // Adjust the time based on your needs
-    }, 1000); // Adjust the time based on your needs
+            }, 2000); // Adjust the time based on your needs
+        }, 2000); // Adjust the time based on your needs
+    }, 50); // Adjust the time based on your needs
 
     isRecording = true;
 }
@@ -141,8 +150,9 @@ function stopRecording() {
 }
 
 function resetStates() {
-    document.getElementById('actionButton').classList.remove('recording', 'upload', 'loading', 'stop');
-    document.getElementById('actionIcon').classList.remove('upload', 'stop');
+    // document.getElementById('actionButton').classList.remove('recording', 'upload', 'loading', 'stop');
+    document.getElementById('actionIcon').classList.remove('upload', 'loading', 'stop');
+    document.getElementById('actionIcon').classList.add('activate');
     document.getElementById('textresponse').innerText = '';
     
     // Reset person image

@@ -53,8 +53,8 @@ body {
     background-color: #2196F3;
     color: #fff;
     border: none;
-    padding: 15px 25px;
-    border-radius: 50%;
+    padding: 10px 10px;
+    border-radius: 40%;
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s ease;
@@ -65,23 +65,23 @@ button:disabled {
     cursor: not-allowed;
 }
 
-.microphone-icon::before {
+#actionIcon.activate::before {
     content: "\1F3A4"; /* Microphone emoji */
     font-size: 30px;
 }
 
 #actionIcon.upload::before {
-    content: "\2B07"; /* Upload arrow emoji */
+    content: "\2714"; /* Upload arrow emoji */
 }
 
 #actionIcon.loading::before {
     content: "\231B"; /* Hourglass emoji */
+    display: inline-block;
     animation: spin 1s infinite linear;
 }
 
 #actionIcon.stop::before {
     content: "\1F6D1"; /* Stop emoji */
-    background-color: yellow;
 }
 
 @keyframes spin {
