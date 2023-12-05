@@ -75,6 +75,19 @@ async function audio(){
 }
 
 
-// chat()
+async function main() {
+  const option = process.argv[2];
+  console.log(option);
+  switch (option) {
+    case 'chat':
+      await chat();
+      break;
+    case 'audio':
+      await audio();
+      break;
+    default:
+      break;
+  }
+}
 
-audio();
+main().then(()=>{console.log("\n\nProcess completed. :)");});
