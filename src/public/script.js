@@ -86,82 +86,74 @@ document.addEventListener('DOMContentLoaded',()=>{
         /* Triggers recorder onStop() */
         recorder.stop();
     })
-})
 
 
 
 
+    
+    /**
+     * ----------------
+     * UI logic
+     * ----------------
+     */
 
-/**
- * ----------------
- * UI logic
- * ----------------
- */
 
+    const actionButton = document.getElementById('actionButton');
+    const actionIcon = document.getElementById('actionIcon');
+    const textresponse = document.getElementById('textresponse');
+    const personImage = document.getElementById('personImage');;
 
-let isRecording = false;
+    let isRecording = false;
 
-function toggleRecording() {
-    if (!isRecording) {
-        startRecording();
-    } else {
-        stopRecording();
+    function toggleRecording() {
+        
+        resetStates();
+        
+        if (!isRecording) {
+            startRecording();
+        } else {
+            stopRecording();
+        }
     }
-}
 
-function startRecording() {
-    // Reset previous states
-    resetStates();
-
-    // Simulate data fetch
-    setTimeout(() => {
-        // document.getElementById('actionButton').classList.add('upload');
-        document.getElementById('actionIcon').classList.add('upload');
+    function startRecording() {
+        
+        // User activate mic and change to send
+        actionIcon.classList.add('upload');
 
         // Simulate loading
         setTimeout(() => {
-            // document.getElementById('actionButton').classList.remove('upload');
-            document.getElementById('actionIcon').classList.remove('upload');
-            // document.getElementById('actionButton').classList.add('loading');
-            document.getElementById('actionIcon').classList.add('loading');
+            actionIcon.classList.remove('upload');
+            actionIcon.classList.add('loading');
             
             // Simulate data response
             setTimeout(() => {
-                document.getElementById('actionIcon').classList.remove('loading');
-                // document.getElementById('actionButton').classList.remove('recording', 'upload', 'loading');
-                document.getElementById('actionIcon').classList.add('stop');
-                document.getElementById('textresponse').innerText = 'Assistant response text here.';
+                actionIcon.classList.remove('loading');
+                actionIcon.classList.add('stop');
+                textresponse.innerText = 'Assistant response text here.';
+                personImage.classList.add('zoomed');
+            }, 2000);
+        }, 2000);
 
-                // Simulate person image zoom in
-                document.getElementById('personImage').classList.add('zoomed');
-            }, 2000); // Adjust the time based on your needs
-        }, 2000); // Adjust the time based on your needs
-    }, 50); // Adjust the time based on your needs
+        isRecording = true;
+    }
 
-    isRecording = true;
-}
+    function stopRecording() {
+        // Reset previous states
+        resetStates();
 
-function stopRecording() {
-    // Reset previous states
-    resetStates();
+        // Additional logic for stopping recording, if needed
+        isRecording = false;
+    }
 
-    // Additional logic for stopping recording, if needed
-    isRecording = false;
-}
+    function resetStates() {
+        
+        actionIcon.classList.remove('upload', 'loading', 'stop');
+        actionIcon.classList.add('activate');
+        textresponse.innerText = '';
+        personImage.classList.remove('zoomed');
+    }
 
-function resetStates() {
-    // document.getElementById('actionButton').classList.remove('recording', 'upload', 'loading', 'stop');
-    document.getElementById('actionIcon').classList.remove('upload', 'loading', 'stop');
-    document.getElementById('actionIcon').classList.add('activate');
-    document.getElementById('textresponse').innerText = '';
-    
-    // Reset person image
-    document.getElementById('personImage').classList.remove('zoomed');
-    setTimeout(() => {
-        // Reset image source after the zoom-out animation
-        document.getElementById('personImage').src = "https://as1.ftcdn.net/v2/jpg/02/46/92/18/1000_F_246921800_d3ixfFSOmVhu2yS5Gj8N2MbLJ7B3BB0e.jpg";
-    }, 500);
-}
-
-// Event listener for the action button
-document.getElementById('actionButton').addEventListener('click', toggleRecording);
+    // Event listener for the action button
+    actionButton.addEventListener('click', toggleRecording);
+})
