@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     // un acumulador para lo que se va recogiendo de I/O
     let audioChunks = [];
     let recorder;
+    let audioHtml = new Audio();
 
 
     /**
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     const actionButton = document.getElementById('actionButton');
     const actionIcon = document.getElementById('actionIcon');
-    const textresponse = document.getElementById('textresponse');
+    const textResponse = document.getElementById('textResponse');
     const personImage = document.getElementById('personImage');;
 
     let buttonPressings = 0;
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                 await sendRequest();
                 break;
             case 2:
-                //TODO: stopAssitant()
+                audioHtml.pause();
                 resetUiStates();
                 break;        
             default:
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             console.log('audioBlob',audioBlob);
             console.log('typeof audioBlob',typeof audioBlob);
             // Instantiate an Audio html element
-            const audioHtml = new Audio();
+            
             let audioUrl = URL.createObjectURL(audioBlob);
             audioHtml.src = audioUrl;
             log('audioUrl',audioUrl);
@@ -119,7 +120,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         setTimeout(() => {
             actionIcon.classList.remove('loading');
             actionIcon.classList.add('stop');
-            textresponse.innerText = 'Assistant response text here.';
+            textResponse.innerText = 'Assistant response text here.';
             personImage.classList.add('zoomed');
         }, 3000)
     }
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     function resetUiStates() {        
         actionIcon.classList.remove('upload', 'loading', 'stop');
         actionIcon.classList.add('activate');
-        textresponse.innerText = '';
+        textResponse.innerText = '';
         personImage.classList.remove('zoomed');
     }
 
