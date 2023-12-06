@@ -103,51 +103,56 @@ document.addEventListener('DOMContentLoaded',()=>{
     const textresponse = document.getElementById('textresponse');
     const personImage = document.getElementById('personImage');;
 
-    let isRecording = false;
+    let buttonPressings = 0;
 
     function toggleRecording() {
         
-        resetStates();
+        // tracks curren button action;
+        const buttonState = buttonPressings % 3;
         
-        if (!isRecording) {
-            startRecording();
-        } else {
-            stopRecording();
-        }
+        switch (buttonState) {
+            case 0:
+                startRecording();
+                break;
+            case 1:
+                sendRequest();
+                break;
+            case 2:
+                //TODO: stopAssitant()
+                resetUiStates();
+                break;        
+            default:
+                break;
+        }        
+        buttonPressings += 1;
     }
 
-    function startRecording() {
-        
-        // User activate mic and change to send
+    function startRecording() {        
+        // Icon change to OK send
         actionIcon.classList.add('upload');
+        // TODO: capture logic
+    }
 
-        // Simulate loading
+    function sendRequest() {
+        // icon change to loading clock
+        actionIcon.classList.remove('upload');
+        actionIcon.classList.add('loading');
+
+        // TODO: backend request
+        // by now to test... remove
         setTimeout(() => {
-            actionIcon.classList.remove('upload');
-            actionIcon.classList.add('loading');
-            
-            // Simulate data response
-            setTimeout(() => {
-                actionIcon.classList.remove('loading');
-                actionIcon.classList.add('stop');
-                textresponse.innerText = 'Assistant response text here.';
-                personImage.classList.add('zoomed');
-            }, 2000);
-        }, 2000);
-
-        isRecording = true;
+            actionIcon.classList.remove('loading');
+            actionIcon.classList.add('stop');
+            textresponse.innerText = 'Assistant response text here.';
+            personImage.classList.add('zoomed');
+        }, 3000)
     }
 
-    function stopRecording() {
-        // Reset previous states
-        resetStates();
-
-        // Additional logic for stopping recording, if needed
-        isRecording = false;
+    function stopAssitant() {
+        // TODO: logic to stop the playback.
     }
 
-    function resetStates() {
-        
+    function resetUiStates() {        
         actionIcon.classList.remove('upload', 'loading', 'stop');
         actionIcon.classList.add('activate');
         textresponse.innerText = '';
