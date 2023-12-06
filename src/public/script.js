@@ -3,22 +3,50 @@ const log = console.log;
 // This happens only after all html is loades (styles and assets does not matters)
 document.addEventListener('DOMContentLoaded',()=>{
 
-    // GRAB ELEMENTS
-    const recordButton = document.getElementById("recordButton");
-    const stopButton = document.getElementById("stopButton");
-    const textResponse = document.getElementById("textResponse");
-    const audioResponse = document.getElementById("audioResponse");
-    
     // un acumulador para lo que se va recogiendo de I/O
-    let audioChunks = []
+    let audioChunks = [];
     let recorder;
 
-    // actions for RECORD
-    recordButton.addEventListener('click', async()=>{
-        /* toggle logic */
-        recordButton.disabled = true;
-        stopButton.disabled = false;
 
+    /**
+     * ----------------
+     * UI logic
+     * ----------------
+     */
+
+    const actionButton = document.getElementById('actionButton');
+    const actionIcon = document.getElementById('actionIcon');
+    const textresponse = document.getElementById('textresponse');
+    const personImage = document.getElementById('personImage');;
+
+    let buttonPressings = 0;
+
+    async function toggleRecording() {
+        
+        // tracks curren button action;
+        const buttonState = buttonPressings % 3;
+        
+        switch (buttonState) {
+            case 0:
+                startRecording();
+                break;
+            case 1:
+                await sendRequest();
+                break;
+            case 2:
+                //TODO: stopAssitant()
+                resetUiStates();
+                break;        
+            default:
+                break;
+        }        
+        buttonPressings += 1;
+    }
+
+    async function startRecording() {        
+        // Icon change to OK send
+        actionIcon.classList.add('upload');
+        // TODO: capture logic
         /* audio Input logic */
         // opens audio Input in the browser process
         const stream = await navigator.mediaDevices.getUserMedia({audio:true});
@@ -76,67 +104,15 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
         // initiate the action of the recorder
         recorder.start();
-    })
-
-    // actions for STOP
-    stopButton.addEventListener('click',()=>{
-        /* toggle logic */
-        recordButton.disabled = false;
-        stopButton.disabled = true;
-        /* Triggers recorder onStop() */
-        recorder.stop();
-    })
-
-
-
-
-    
-    /**
-     * ----------------
-     * UI logic
-     * ----------------
-     */
-
-
-    const actionButton = document.getElementById('actionButton');
-    const actionIcon = document.getElementById('actionIcon');
-    const textresponse = document.getElementById('textresponse');
-    const personImage = document.getElementById('personImage');;
-
-    let buttonPressings = 0;
-
-    function toggleRecording() {
-        
-        // tracks curren button action;
-        const buttonState = buttonPressings % 3;
-        
-        switch (buttonState) {
-            case 0:
-                startRecording();
-                break;
-            case 1:
-                sendRequest();
-                break;
-            case 2:
-                //TODO: stopAssitant()
-                resetUiStates();
-                break;        
-            default:
-                break;
-        }        
-        buttonPressings += 1;
-    }
-
-    function startRecording() {        
-        // Icon change to OK send
-        actionIcon.classList.add('upload');
-        // TODO: capture logic
     }
 
     function sendRequest() {
         // icon change to loading clock
         actionIcon.classList.remove('upload');
         actionIcon.classList.add('loading');
+
+        /* Triggers recorder onStop() */
+        recorder.stop();
 
         // TODO: backend request
         // by now to test... remove
