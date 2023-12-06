@@ -98,6 +98,11 @@ document.addEventListener('DOMContentLoaded',()=>{
             audioUrl = URL.createObjectURL(audioBlobResponse);
             audioHtml.src = audioUrl;
             log('audioUrl',audioUrl);
+            // set UI to response mode
+            personImage.classList.add('zoomed');
+            actionIcon.classList.remove('loading');
+            actionIcon.classList.add('stop');
+            textResponse.innerText = data.respuestaTexto;
             // Browser play audio
             audioHtml.play()
             // Clean chunks to get new capture
@@ -118,10 +123,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         // TODO: backend request
         // by now to test... remove
         setTimeout(() => {
-            actionIcon.classList.remove('loading');
-            actionIcon.classList.add('stop');
-            textResponse.innerText = 'Assistant response text here.';
-            personImage.classList.add('zoomed');
+            
         }, 3000)
     }
 
@@ -132,7 +134,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     function resetUiStates() {        
         actionIcon.classList.remove('upload', 'loading', 'stop');
         actionIcon.classList.add('activate');
-        textResponse.innerText = '';
+        textResponse.innerText = '¡Hola!, ¿En qué puedo ayudarte?';
         personImage.classList.remove('zoomed');
     }
 
