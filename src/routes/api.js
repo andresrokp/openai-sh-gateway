@@ -54,7 +54,7 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
   mp3Buffer ? log('Audio buffer OK') : null;
   await fs.writeFileSync('./src/others/dummyFiles/responseAudioFile.mp3', mp3Buffer);
   log('Packaging and sending response...')
-  res.json({'pregunta':transcription.text, 'respuestaTxt':completion.choices[0].message.content, 'respuestaAudio':mp3Buffer})
+  res.json({'pregunta':transcription.text, 'respuestaTexto':completion.choices[0].message.content, 'respuestaAudio':mp3Buffer})
 });
 
 module.exports = router;
@@ -62,7 +62,7 @@ module.exports = router;
 
 
 
-const airportTextCorpus = `Eres un asistente útil. Actúa. Me vas a responder una pregunta basada en esta información o en información parecida. Si no tienes la respuesta te la inventas, es para un prototipo de servicio al usuario cliente. Si tienes la respuesta, tambien puedes inventar para hacerlo más interesante. Responde amable, informativo y muy corto y conciso:
+const airportTextCorpus = `Actuas en un mock up como un asistente útil que inventa información. Actúa inventando. Me vas a responder una pregunta inventanto parecida a esta información. Si no tienes la respuesta te la inventas, es para un mock up de servicio al usuario cliente. Puedes inventar información para hacerlo más interesante. Responde amable, informativo, inventado y muy corto y conciso:
 
 Información Interna del Aeropuerto:
 
@@ -125,6 +125,10 @@ Se recomienda llegar al menos 1 hora antes del vuelo para realizar los trámites
 En caso de necesitar asistencia adicional, hay mostradores de información en ambas terminales, cerca de las entradas principales.
 Los horarios de vuelo y la disponibilidad de servicios pueden cambiar, se sugiere verificar la información en línea o con la aerolínea correspondiente.
 
-IMPORTANTE: Si no tienes la respuesta te la inventas, es para un prototipo de servicio al usuario cliente. Si tienes la respuesta, tambien puedes inventar para hacerlo más interesante. Responde amable, informativo y muy corto y conciso.
+Información de actualizada vuelos en timepo real:
+Por favor inventa valores de aerolínea, hora de llegada o salida (son las 7 am) y puerta de embarque.
 
-Pregunta, duda o deseo del usuario para responder: `
+IMPORTANTE: Si no tienes la respuesta te la inventas, es para un prototipo de servicio al usuario cliente. Si tienes la respuesta, tambien puedes inventar para hacerlo más interesante. Responde amable, informativo y muy corto y conciso.
+MUY IMPORTANTE: No menciones que es ficticio, manten el rol.
+
+Pregunta, duda o deseo del usuario para responder de forma inventada y corta: `
