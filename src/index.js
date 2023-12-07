@@ -1,11 +1,22 @@
-// load my config
-require('dotenv').config();
+const https = require('https');
+const fs = require('fs');
+const app = require('./server'); // Server setup logic
+
 const PORT = process.env.PORT || 3000;
-// load core set up of the server from neighbor file
-const app = require('./server');
 
+if (process.env.NODE_ENV === 'production') {
+  const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/fullchain.pem'),
+  };
 
-// execute server object
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+  const httpsServer = https.createServer(options, app);
+
+  httpsServer.listen(443, () => {
+    console.log('HTTPS Server running on port 443');
+  });
+} else {
+  app.listen(PORT, () => {
+    console.log(`HTTP Server running on port ${PORT}`);
+  });
+}
