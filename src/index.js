@@ -6,8 +6,8 @@ const PORT = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV === 'production') {
   const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/shassistant.ddns.net/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/shassistant.ddns.net/fullchain.pem'),
   };
 
   const httpsServer = https.createServer(options, app);
