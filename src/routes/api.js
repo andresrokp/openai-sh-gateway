@@ -32,7 +32,7 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
   log('Request Audio transcript :) \n', transcription);
   
   const content = airportTextCorpus + transcription.text;
-  log('content >> ',content);
+  // log('content >> ',content);
   const completion = await openai.chat.completions.create({
     messages: [
       {
