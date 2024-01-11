@@ -1,5 +1,5 @@
 ### Work flow
-
+---
 gpt prompt:
 Please guide me on structuring a secondary backend (Backend 2) that securely handles client requests with JWT tokens and interfaces with an existing LLM API (OpenAI). I want the clients to initiate requests from the front end (thingsboard client) to Backend 2. The client already have a jwt from a backend 1, and will send it to backend 2 to verify validity, and subsequently adapt and forward the main client querie to the LLM API. How should I design this intermediate Backend 2 effectively? Feel free to ask any clarifying questions to help me proceed.
 ---
@@ -77,7 +77,7 @@ Please help me giving me a JavaScript function to describe a complex Json object
 ---
 ---
 ---
-DUTY: Tight WSL2 memory efficiency
+DUTY: Tight WSL2 memory efficiency on my machine
 + vmem was eating too much memory
 + How to manage wsl memory
     + https://www.aleksandrhovhannisyan.com/blog/limiting-memory-usage-in-wsl-2/
@@ -87,10 +87,30 @@ DUTY: Tight WSL2 memory efficiency
         + `wsl --shutdown`
     + On linux
         + `free -h --giga`
+        + `top -o %MEM`
         + `editor "$(wslpath "C:\Users\YourUsername\.wslconfig")"`
         + write the file
 ---
 ---
+Set up Digital Ocean sever
++ A cheap server: 1GB, 1core, 25GB
++ as root
+    + `adduser {username}` . Crear usuario
+    + `usermod -aG sudo {username}` . Agregar user al group
+ENV INSTALLATION
++ `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash` . Install nvm (https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
++ `curl -fsSL https://get.pnpm.io/install.sh | sh -` . Install pnpm (https://pnpm.io/installation)
+    + 
++ `nvm install --lts` . Install Node LTS
++ `pnpm i -g pm2` . Install PM2
+RUN PROJECT
+    + `git clone`, `pnpm i`, `node index.js`, `pm2 logs` 
++ Some system check
+    + `top -o %MEM` . Sort top by memory usage
+    + `ps -e` . view all active processes
+    + `ps -e | grep node` . check for NodeJS porcesses
+
++ 
 ---
 ---
 ---
