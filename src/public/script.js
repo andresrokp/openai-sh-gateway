@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             const utilityForm = new FormData();
             utilityForm.append('audioFile', audioBlob);
             // fetch Form's data to endpoint exposed by express. Get a Response object back
-            const response = await fetch(`https://${window.location.host}/api/audiorequest`,{
+            const response = await fetch(`${window.location.protocol}://${window.location.host}/api/audiorequest`,{
                 method: 'POST',
                 body: utilityForm
             });
