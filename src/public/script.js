@@ -15,10 +15,14 @@ document.addEventListener('DOMContentLoaded',()=>{
      * ----------------
      */
 
+    const personImage = document.getElementById('personImage');;
+    const textResponse = document.getElementById('textResponse');
+
     const actionButton = document.getElementById('actionButton');
     const actionIcon = document.getElementById('actionIcon');
-    const textResponse = document.getElementById('textResponse');
-    const personImage = document.getElementById('personImage');;
+    
+    const feedbackButtonsContainer = document.getElementById('feedbackButtonsContainer');
+
 
     let buttonPressings = 0;
 
@@ -35,6 +39,8 @@ document.addEventListener('DOMContentLoaded',()=>{
                 await sendRequest();
                 break;
             case 2:
+                actionButton.style.display = 'none'
+                feedbackButtonsContainer.style.display = 'flex';
                 audioHtml.pause();
                 resetUiStates();
                 break;        
