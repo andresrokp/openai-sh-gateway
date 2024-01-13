@@ -57,6 +57,12 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
   res.json({'pregunta':transcription.text, 'respuestaTexto':completion.choices[0].message.content, 'respuestaAudio':mp3Buffer})
 });
 
+router.post('/rating', async (req,res)=>{
+  log('...recieving rating...')
+  log(req.body);
+  res.sendStatus(200);
+})
+
 module.exports = router;
 
 

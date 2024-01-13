@@ -155,11 +155,22 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
 
     function handleRatingButtons(e) {
-        const buttonId = e.target.id;
-        log('Click button ', buttonId)
-
-        // hide this buttons
+        // hide this buttons show main button
         actionButton.style.display = 'block'
         feedbackButtonsContainer.style.display = 'none';
+        
+        const buttonId = e.target.id;
+        log('Clicked button ', buttonId)
+        
+        const rate = { rate : buttonId };
+        log('rate ', rate)
+        
+        fetch(`${window.location.protocol}//${window.location.host}/api/rating`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(rate)
+        });
     }
 })
