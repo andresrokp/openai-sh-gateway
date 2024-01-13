@@ -51,7 +51,7 @@ body {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #2196F3;
+    background-color: #4d81ad;
     color: #fff;
     border: none;
     padding: 10px 10px;
@@ -59,11 +59,6 @@ body {
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s ease;
-}
-
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
 }
 
 #actionIcon.activate::before {
@@ -83,6 +78,22 @@ button:disabled {
 
 #actionIcon.stop::before {
     content: "\1F6D1"; /* Stop emoji */
+}
+
+#feedbackButtonsContainer {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.feedback-button {
+    font-size: 20px;
+    margin: 0 10px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
 @keyframes spin {
