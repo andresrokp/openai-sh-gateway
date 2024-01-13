@@ -23,6 +23,16 @@ document.addEventListener('DOMContentLoaded',()=>{
     
     const feedbackButtonsContainer = document.getElementById('feedbackButtonsContainer');
 
+    
+    // Event listener for the action button
+    actionButton.addEventListener('click', toggleRecording);
+    const feedbackButtonsArray = document.querySelectorAll('.feedback-button');
+    feedbackButtonsArray.forEach(button => {
+        log('iterate buttons');
+        button.addEventListener('click',handleRatingButtons)}
+    );
+
+
 
     let buttonPressings = 0;
 
@@ -144,6 +154,12 @@ document.addEventListener('DOMContentLoaded',()=>{
         personImage.classList.remove('zoomed');
     }
 
-    // Event listener for the action button
-    actionButton.addEventListener('click', toggleRecording);
+    function handleRatingButtons(e) {
+        const buttonId = e.target.id;
+        log('Click button ', buttonId)
+
+        // hide this buttons
+        actionButton.style.display = 'block'
+        feedbackButtonsContainer.style.display = 'none';
+    }
 })
