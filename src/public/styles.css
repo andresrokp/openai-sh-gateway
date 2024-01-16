@@ -4,6 +4,10 @@ body {
     font-family: Arial, sans-serif;
 }
 
+a{
+    text-decoration: none;
+    float: right;
+}
 .canvas-container {
     position: relative;
     top: 0;
