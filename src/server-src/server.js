@@ -13,7 +13,7 @@ app.use(express.json());
 // To poner la verga console log
 app.use(morgan('[:date] :remote-addr :method :url :status :res[content-length] - :response-time ms'));
 // to use the public folder for page serving
-app.use(express.static("./src/public"));
+app.use(express.static("./public"));
 // to allow cross origin resources sharing
 app.use(cors());
 

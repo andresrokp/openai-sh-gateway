@@ -1,6 +1,6 @@
 const https = require('https');
 const fs = require('fs');
-const app = require('./server'); // Server setup logic
+const app = require('./src/server-src/server'); // Server setup logic
 
 const PORT = process.env.PORT || 3000;
 

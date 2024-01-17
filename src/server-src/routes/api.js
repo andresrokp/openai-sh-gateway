@@ -15,7 +15,7 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
   // extract middleware result
   const audioFileBuffer = req.file.buffer;
   // save as file in folder
-  fs.writeFileSync('./src/others/dummyFiles/requestAudioFile.mp3', audioFileBuffer, (err) => {
+  fs.writeFileSync('./src/server-src/others/dummyFiles/requestAudioFile.mp3', audioFileBuffer, (err) => {
     if (err) {
         console.error('Error saving audio file :( \n', err);
         res.status(500).json({ error: 'Internal Server Error :(' });
@@ -26,7 +26,7 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
   
   //TODO!: pipeline this and avoid to use the dummy file
   const transcription = await openai.audio.transcriptions.create({
-    file: fs.createReadStream('./src/others/dummyFiles/requestAudioFile.mp3'),
+    file: fs.createReadStream('./src/server-src/others/dummyFiles/requestAudioFile.mp3'),
     model: 'whisper-1',
   });
   log('Request Audio transcript :) \n', transcription);
@@ -52,7 +52,7 @@ router.post('/audiorequest', upload.single('audioFile') , async (req, res) => {
   mp3 ? log('Audio response OK') : null;
   const mp3Buffer = Buffer.from(await mp3.arrayBuffer());
   mp3Buffer ? log('Audio buffer OK') : null;
-  await fs.writeFileSync('./src/others/dummyFiles/responseAudioFile.mp3', mp3Buffer);
+  await fs.writeFileSync('./src/server-src/others/dummyFiles/responseAudioFile.mp3', mp3Buffer);
   log('Packaging and sending response...')
   res.json({'pregunta':transcription.text, 'respuestaTexto':completion.choices[0].message.content, 'respuestaAudio':mp3Buffer})
 });
