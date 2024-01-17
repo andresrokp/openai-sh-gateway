@@ -115,6 +115,33 @@ RUN PROJECT
 ---
 ---
 
+ADDED REACT VITE BUILD
++ In other place, loaded created vite to see main files
++ Brougth here the main files an lines
+    + `vite.config.js` in root
+    + `.jsx` files in `/src`
+    + `/assets` dir in `/src`
+    + `.gitignore` lines
+    + `.eslintrc.cjs` in root
+    + `vite.svg` file in public (build out)
+    + inserted new dependencies in `package.json`
+    + inserted script in `package.json`
+    + run `pnpm i`
++ Build app with `pnpm run build`
++ Browser Error: 'Failed to load module script: Expected a JavaScript module script but the server responded with a MIME type of "text/jsx". Strict MIME type checking is enforced for module scripts per HTML spec.'
+    + Set JS script path in build's index.html as relative (added '.' before '/')
++ Set the build folder inside inner public
+    + `Build: { outDir : './path/to/build/dir' }` in `vite.config.js`
++ Error: vite.svg not found
+    + Create an dummy/ugly outer public folder in root and added the svg file
+    + Seems like docu said: vite consider links as relative, but images as globals
++ Put all this test into a Git Branch
+
+
+
+
+
+---
 ---
 Milestones
 + voice2voice AI assistant beta
