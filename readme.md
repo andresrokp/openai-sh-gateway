@@ -115,7 +115,7 @@ RUN PROJECT
 ---
 ---
 
-ADDED REACT VITE BUILD
+ADDED UGLY REACT VITE BUILD
 + In other place, loaded created vite to see main files
 + Brougth here the main files an lines
     + `vite.config.js` in root
@@ -135,7 +135,21 @@ ADDED REACT VITE BUILD
 + Error: vite.svg not found
     + Create an dummy/ugly outer public folder in root and added the svg file
     + Seems like docu said: vite consider links as relative, but images as globals
-+ Put all this test into a Git Branch
++ Put all this test into a dummy Git Branch
+
+
+REFACTOR PROJECT STRUCTURE
++ Create 2 src subfolders (server & react)
++ Take out public folder to working dir root
++ fix al file links
+
+
+ADDED GOOD VITE-REACT
++ All the previous plus
+    + set 2 separate folders for vite's root and outDir leveraging folder up `../../`
+    + include `base: 'buildParentDir'` in `vite.config.js` to match build assets folder
+    + put `vite.svg` inside `src/asset`
+
 
 
 
